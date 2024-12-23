@@ -1,0 +1,15 @@
+- id: licensa-verify
+  name: Licensa Check
+  description: Verify presence of license headers in source code files
+  entry: licensa verify
+  language: rust
+  pass_filenames: false
+  always_run: true
+
+- id: licensa-apply
+  name: Licensa Apply
+  description: Add missing license headers to source code files
+  entry: licensa apply
+  language: rust
+  pass_filenames: false
+  always_run: true

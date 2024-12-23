@@ -13,8 +13,28 @@ You may be looking for:
 
 - [Overview](#overview)
 - [Installation](#installation)
+  - [Cargo](#cargo)
+  - [Linux](#linux)
+  - [Windows (PowerShell)](#windows-powershell)
 - [Usage](#usage)
+  - [Generate project-wide Licensa configurations](#generate-project-wide-licensa-configurations)
+  - [Add license headers to your source files](#add-license-headers-to-your-source-files)
+    - [With defaults from `.licensarc` config file](#with-defaults-from-licensarc-config-file)
+      - [*src/Rivendell.ts*](#srcrivendellts)
+      - [*src/Isengard.ts*](#srcisengardts)
+    - [Override defaults with supplied options](#override-defaults-with-supplied-options)
+      - [*src/Rivendell.ts*](#srcrivendellts-1)
+      - [*src/Isengard.ts*](#srcisengardts-1)
 - [CLI Reference](#cli-reference)
+  - [Commands](#commands)
+    - [`init`](#init)
+    - [`apply`](#apply)
+    - [`verify`](#verify)
+  - [Options](#options)
+    - [Globals](#globals)
+- [Pre-commit](#pre-commit)
+  - [Installation](#installation-1)
+  - [Usage](#usage-1)
 - [License](#license)
 - [Contribution](#contribution)
 
@@ -101,7 +121,7 @@ Suppose you have a TypeScript project "Lord Of The Rings Map" (lotr-map) with th
     │   ├── Mithrandir.ts     # has license header
     │   ├── Gondor.ts         # has license header
     │   └── MinasTirith.ts    # has license header
-    ├── .gitignore  
+    ├── .gitignore
     ├── package.json
     └── tsconfig.json
 ```
@@ -132,7 +152,7 @@ Upon successful execution, the command will expand your project structure to inc
     │   ├── Mithrandir.ts     # has license header
     │   ├── Gondor.ts         # has license header
     │   └── MinasTirith.ts    # has license header
-    ├── .gitignore  
+    ├── .gitignore
     ├── .licensaignore        # ADDED
     ├── .licensarc            # ADDED
     ├── package.json
@@ -272,6 +292,40 @@ Optional, if present in .licensarc config file
 **-h, --help** Show help message
 
 **-v, --version** Show program's version number
+
+## Pre-commit
+
+Licensa can be used as a pre-commit hook to automatically verify and apply license headers before each commit.
+
+### Installation
+
+1. Install [pre-commit](https://pre-commit.com/#install)
+
+2. Add the following configuration to your `.pre-commit-config.yaml`:
+
+```yaml
+repos:
+  - repo: https://github.com/ekkolon/licensa
+    rev: v0.1.9
+    hooks:
+      - id: licensa-apply   # Apply missing license headers
+      - id: licensa-verify  # Verify license headers
+```
+
+3. Install the pre-commit hooks:
+
+```bash
+pre-commit install
+```
+
+### Usage
+
+Once installed, Licensa will automatically:
+
+1. Apply missing license headers to new files `licensa-apply`
+2. Verify that all files have proper license headers `licensa-verify`
+
+Note: Make sure to run `licensa init` first to set up your project's license configuration (`.licensarc`).
 
 ## License
 
